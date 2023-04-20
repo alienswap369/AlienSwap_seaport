@@ -56,8 +56,6 @@ const optimizerSettingsNoSpecializer = {
     constantOptimizer: true,
     yulDetails: {
       stackAllocation: true,
-      optimizerSteps:
-        "dhfoDgvulfnTUtnIf[xa[r]EscLMcCTUtTOntnfDIulLculVcul [j]Tpeulxa[rul]xa[r]cLgvifCTUca[r]LSsTOtfDnca[r]Iulc]jmul[jul] VcTOcul jmul",
     },
   },
 };
@@ -73,9 +71,7 @@ const config: HardhatUserConfig = {
         settings: {
           viaIR: true,
           optimizer: {
-            ...(process.env.NO_SPECIALIZER
-              ? optimizerSettingsNoSpecializer
-              : { enabled: true, runs: 4_294_967_295 }),
+            ...optimizerSettingsNoSpecializer,
           },
           metadata: {
             bytecodeHash: "none",

@@ -14,6 +14,8 @@
 Alienswap_Seaport is Fork from seaport1.4. 
 Just rename Contract Name, to diff from origin seaport1.4
 
+Build instructions see: [BUILD.md](BUILD.md)
+
 ## Table of Contents
 
 - [Seaport](#seaport)
