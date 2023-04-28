@@ -8,9 +8,23 @@ function delay(ms: number) {
 }
 
 async function main() {
+  const Alienswap = await ethers.getContractFactory(
+    "Alienswap"
+  );
+
+  const alienswap = await Alienswap.deploy("0xC04DD964ed36c0e4796F53A7168393ED4Fc38FF6");
+  await alienswap.deployed();
+  console.log(
+    "Alienswap Contract deployed to address:",
+    alienswap.address
+  );
 }
 
-async function deploy(contractName: string, version: string, args: any[] = []) {
+async function deploy3(
+  contractName: string,
+  version: string,
+  args: any[] = []
+) {
   const [deployer] = await ethers.getSigners();
   // https://github.com/lifinance/create3-factory
   const create3Factory = new Contract(

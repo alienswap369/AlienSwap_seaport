@@ -45,7 +45,7 @@ task("print-report", "Print the last gas report").setAction(
 
 const optimizerSettingsNoSpecializer = {
   enabled: true,
-  runs: 4_294_967_295,
+  runs: 100000,
   details: {
     peephole: true,
     inliner: true,
@@ -70,17 +70,7 @@ const config: HardhatUserConfig = {
         version: "0.8.17",
         settings: {
           viaIR: true,
-          optimizer: {
-            ...optimizerSettingsNoSpecializer,
-          },
-          metadata: {
-            bytecodeHash: "none",
-          },
-          outputSelection: {
-            "*": {
-              "*": ["evm.assembly", "irOptimized", "devdoc"],
-            },
-          },
+          optimizer: { enabled: true, runs: 1000000 },
         },
       },
     ],
@@ -126,6 +116,14 @@ const config: HardhatUserConfig = {
     verificationNetwork: {
       url: process.env.NETWORK_RPC ?? "",
     },
+    "scroll-alpha": {
+      url: "https://alpha-rpc.scroll.io/l2",
+      accounts: process.env.DEPLOYER_PK ? [process.env.DEPLOYER_PK] : undefined,
+    },
+    linea: {
+      url: "https://rpc.goerli.linea.build",
+      accounts: process.env.DEPLOYER_PK ? [process.env.DEPLOYER_PK] : undefined,
+    },
   },
   gasReporter: {
     enabled: process.env.REPORT_GAS !== undefined,
@@ -134,7 +132,30 @@ const config: HardhatUserConfig = {
     noColors: true,
   },
   etherscan: {
-    apiKey: process.env.EXPLORER_API_KEY,
+    apiKey: {
+      goerli: process.env.ETHERSCAN_API_KEY!,
+      mainnet: process.env.ETHERSCAN_API_KEY!,
+      "scroll-alpha": "no_key_needed",
+      linea: "no_key_needed",
+    },
+    customChains: [
+      {
+        network: "scroll-alpha",
+        chainId: 534353,
+        urls: {
+          apiURL: "https://blockscout.scroll.io/api",
+          browserURL: "https://blockscout.scroll.io/",
+        },
+      },
+      {
+        network: "linea",
+        chainId: 59140,
+        urls: {
+          apiURL: "https://explorer.goerli.linea.build/api",
+          browserURL: "https://explorer.goerli.linea.build/",
+        },
+      },
+    ],
   },
   // specify separate cache for hardhat, since it could possibly conflict with foundry's
   paths: { cache: "hh-cache" },
