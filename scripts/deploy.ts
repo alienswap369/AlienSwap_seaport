@@ -8,15 +8,26 @@ function delay(ms: number) {
 }
 
 async function main() {
-  const Alienswap = await ethers.getContractFactory(
-    "Alienswap"
+  // const Alienswap = await ethers.getContractFactory(
+  //   "Alienswap"
+  // );
+
+  // const alienswap = await Alienswap.deploy("0xC04DD964ed36c0e4796F53A7168393ED4Fc38FF6");
+  // await alienswap.deployed();
+  // console.log(
+  //   "Alienswap Contract deployed to address:",
+  //   alienswap.address
+  // );
+
+  const ConduitController = await ethers.getContractFactory(
+    "ConduitController"
   );
 
-  const alienswap = await Alienswap.deploy("0xC04DD964ed36c0e4796F53A7168393ED4Fc38FF6");
-  await alienswap.deployed();
+  const conduitController = await ConduitController.deploy();
+  await conduitController.deployed();
   console.log(
-    "Alienswap Contract deployed to address:",
-    alienswap.address
+    "conduitController Contract deployed to address:",
+    conduitController.address
   );
 }
 

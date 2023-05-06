@@ -15,6 +15,9 @@ import "@nomiclabs/hardhat-etherscan";
 import "@typechain/hardhat";
 import "hardhat-gas-reporter";
 import "solidity-coverage";
+import "@matterlabs/hardhat-zksync-deploy";
+import "@matterlabs/hardhat-zksync-solc";
+import "@matterlabs/hardhat-zksync-verify";
 
 // Filter Reference Contracts
 subtask(TASK_COMPILE_SOLIDITY_GET_SOURCE_PATHS).setAction(
@@ -107,6 +110,11 @@ const config: HardhatUserConfig = {
       },
     },
   },
+  zksolc: {
+    version: "1.3.0",
+    compilerSource: "binary",
+    settings: {},
+  },
   networks: {
     hardhat: {
       blockGasLimit: 30_000_000,
@@ -116,6 +124,10 @@ const config: HardhatUserConfig = {
     verificationNetwork: {
       url: process.env.NETWORK_RPC ?? "",
     },
+    goerli: {
+      url: "https://rpc.ankr.com/eth_goerli",
+      zksync: false,
+    },
     "scroll-alpha": {
       url: "https://alpha-rpc.scroll.io/l2",
       accounts: process.env.DEPLOYER_PK ? [process.env.DEPLOYER_PK] : undefined,
@@ -123,6 +135,14 @@ const config: HardhatUserConfig = {
     linea: {
       url: "https://rpc.goerli.linea.build",
       accounts: process.env.DEPLOYER_PK ? [process.env.DEPLOYER_PK] : undefined,
+    },
+    zkSyncEraTestnet: {
+      url: "https://testnet.era.zksync.dev",
+      accounts: process.env.DEPLOYER_PK ? [process.env.DEPLOYER_PK] : undefined,
+      ethNetwork: "goerli",
+      zksync: true,
+      verifyURL:
+        "https://zksync2-testnet-explorer.zksync.dev/contract_verification",
     },
   },
   gasReporter: {
@@ -137,6 +157,7 @@ const config: HardhatUserConfig = {
       mainnet: process.env.ETHERSCAN_API_KEY!,
       "scroll-alpha": "no_key_needed",
       linea: "no_key_needed",
+      zkSyncEraTestnet: "no_key_needed",
     },
     customChains: [
       {
@@ -153,6 +174,14 @@ const config: HardhatUserConfig = {
         urls: {
           apiURL: "https://explorer.goerli.linea.build/api",
           browserURL: "https://explorer.goerli.linea.build/",
+        },
+      },
+      {
+        network: "zkSyncEraTestnet",
+        chainId: 280,
+        urls: {
+          apiURL: "https://blockscout.scroll.io/api",
+          browserURL: "https://goerli.explorer.zksync.io/",
         },
       },
     ],
