@@ -120,8 +120,12 @@ const config: HardhatUserConfig = {
       url: "https://alpha-rpc.scroll.io/l2",
       accounts: process.env.DEPLOYER_PK ? [process.env.DEPLOYER_PK] : undefined,
     },
-    linea: {
+    "linea-testnet": {
       url: "https://rpc.goerli.linea.build",
+      accounts: process.env.DEPLOYER_PK ? [process.env.DEPLOYER_PK] : undefined,
+    },
+    "linea-mainnet": {
+      url: "https://linea-mainnet.infura.io/v3",
       accounts: process.env.DEPLOYER_PK ? [process.env.DEPLOYER_PK] : undefined,
     },
   },
@@ -136,7 +140,8 @@ const config: HardhatUserConfig = {
       goerli: process.env.ETHERSCAN_API_KEY!,
       mainnet: process.env.ETHERSCAN_API_KEY!,
       "scroll-alpha": "no_key_needed",
-      linea: "no_key_needed",
+      "linea-testnet": "no_key_needed",
+      "linea-mainnet": "no_key_needed",
     },
     customChains: [
       {
@@ -148,11 +153,19 @@ const config: HardhatUserConfig = {
         },
       },
       {
-        network: "linea",
+        network: "linea-testnet",
         chainId: 59140,
         urls: {
           apiURL: "https://explorer.goerli.linea.build/api",
           browserURL: "https://explorer.goerli.linea.build/",
+        },
+      },
+      {
+        network: "linea-mainnet",
+        chainId: 59144,
+        urls: {
+          apiURL: "https://lineascan.build/api",
+          browserURL: "https://lineascan.build/",
         },
       },
     ],

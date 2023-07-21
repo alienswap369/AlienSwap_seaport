@@ -8,11 +8,24 @@ function delay(ms: number) {
 }
 
 async function main() {
+  // 部署 conduit controller
+  const ConduitController = await ethers.getContractFactory(
+    "ConduitController"
+  );
+  const conduitController = await ConduitController.deploy();
+  await conduitController.deployed();
+  console.log(
+    "ConduitController Contract deployed to address:",
+    conduitController.address
+  );
+
+  await delay(3000)
+
+  // 部署alienswap合约
   const Alienswap = await ethers.getContractFactory(
     "Alienswap"
   );
-
-  const alienswap = await Alienswap.deploy("0xC04DD964ed36c0e4796F53A7168393ED4Fc38FF6");
+  const alienswap = await Alienswap.deploy(conduitController.address);
   await alienswap.deployed();
   console.log(
     "Alienswap Contract deployed to address:",
