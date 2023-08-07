@@ -125,7 +125,7 @@ const config: HardhatUserConfig = {
       accounts: process.env.DEPLOYER_PK ? [process.env.DEPLOYER_PK] : undefined,
     },
     "linea-mainnet": {
-      url: "https://linea-mainnet.infura.io/v3",
+      url: `https://linea-mainnet.infura.io/v3/${process.env.INFURA_API_KEY}`,
       accounts: process.env.DEPLOYER_PK ? [process.env.DEPLOYER_PK] : undefined,
     },
   },
@@ -164,7 +164,7 @@ const config: HardhatUserConfig = {
         network: "linea-mainnet",
         chainId: 59144,
         urls: {
-          apiURL: "https://lineascan.build/api",
+          apiURL: "https://api.lineascan.build",
           browserURL: "https://lineascan.build/",
         },
       },
