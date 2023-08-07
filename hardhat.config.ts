@@ -45,7 +45,7 @@ task("print-report", "Print the last gas report").setAction(
 
 const optimizerSettingsNoSpecializer = {
   enabled: true,
-  runs: 100000,
+  runs: 1000000,
   details: {
     peephole: true,
     inliner: true,
