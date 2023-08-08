@@ -141,7 +141,7 @@ const config: HardhatUserConfig = {
       mainnet: process.env.ETHERSCAN_API_KEY!,
       "scroll-alpha": "no_key_needed",
       "linea-testnet": "no_key_needed",
-      "linea-mainnet": "no_key_needed",
+      "linea-mainnet": process.env.ETHERSCAN_API_KEY!,
     },
     customChains: [
       {
@@ -164,7 +164,7 @@ const config: HardhatUserConfig = {
         network: "linea-mainnet",
         chainId: 59144,
         urls: {
-          apiURL: "https://api.lineascan.build",
+          apiURL: "https://api.lineascan.build/api",
           browserURL: "https://lineascan.build/",
         },
       },
