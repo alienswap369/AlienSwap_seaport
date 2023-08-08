@@ -128,6 +128,14 @@ const config: HardhatUserConfig = {
       url: `https://linea-mainnet.infura.io/v3/${process.env.INFURA_API_KEY}`,
       accounts: process.env.DEPLOYER_PK ? [process.env.DEPLOYER_PK] : undefined,
     },
+    "base-testnet": {
+      url: "https://goerli.base.org",
+      accounts: process.env.DEPLOYER_PK ? [process.env.DEPLOYER_PK] : undefined,
+    },
+    "base-mainnet": {
+      url: `https://developer-access-mainnet.base.org`,
+      accounts: process.env.DEPLOYER_PK ? [process.env.DEPLOYER_PK] : undefined,
+    },
   },
   gasReporter: {
     enabled: process.env.REPORT_GAS !== undefined,
@@ -142,6 +150,8 @@ const config: HardhatUserConfig = {
       "scroll-alpha": "no_key_needed",
       "linea-testnet": "no_key_needed",
       "linea-mainnet": process.env.ETHERSCAN_API_KEY!,
+      "base-testnet": "no_key_needed",
+      "base-mainnet": process.env.ETHERSCAN_API_KEY!,
     },
     customChains: [
       {
@@ -166,6 +176,22 @@ const config: HardhatUserConfig = {
         urls: {
           apiURL: "https://api.lineascan.build/api",
           browserURL: "https://lineascan.build/",
+        },
+      },
+      {
+        network: "base-testnet",
+        chainId: 84531,
+        urls: {
+          apiURL: "https://api-goerli.basescan.org/api",
+          browserURL: "https://goerli.basescan.org",
+        },
+      },
+      {
+        network: "base-mainnet",
+        chainId: 8453,
+        urls: {
+          apiURL: "https://api.basescan.org/api",
+          browserURL: "https://basescan.org",
         },
       },
     ],

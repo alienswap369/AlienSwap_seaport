@@ -9,23 +9,23 @@ function delay(ms: number) {
 
 async function main() {
   // 部署 conduit controller
-  const ConduitController = await ethers.getContractFactory(
-    "ConduitController"
-  );
-  const conduitController = await ConduitController.deploy();
-  await conduitController.deployed();
-  console.log(
-    "ConduitController Contract deployed to address:",
-    conduitController.address
-  );
+  // const ConduitController = await ethers.getContractFactory(
+  //   "ConduitController"
+  // );
+  // const conduitController = await ConduitController.deploy();
+  // await conduitController.deployed();
+  // console.log(
+  //   "ConduitController Contract deployed to address:",
+  //   conduitController.address
+  // );
 
-  await delay(3000)
+  // await delay(3000)
 
   // 部署alienswap合约
   const Alienswap = await ethers.getContractFactory(
     "Alienswap"
   );
-  const alienswap = await Alienswap.deploy(conduitController.address);
+  const alienswap = await Alienswap.deploy("0x00000000f9490004c11cef243f5400493c00ad63"); // opensea官方部署的conduit controller
   await alienswap.deployed();
   console.log(
     "Alienswap Contract deployed to address:",
