@@ -136,6 +136,20 @@ const config: HardhatUserConfig = {
       url: `https://developer-access-mainnet.base.org`,
       accounts: process.env.DEPLOYER_PK ? [process.env.DEPLOYER_PK] : undefined,
     },
+
+    arbitrum: {
+      //mainet
+      url: `https://rpc.ankr.com/arbitrum`,
+      // url: "https://endpoints.omniatech.io/v1/arbitrum/one/public",
+      // url: "https://arb1.arbitrum.io/rpc",
+      accounts: process.env.DEPLOYER_PK ? [process.env.DEPLOYER_PK] : undefined,
+    },
+
+    optimism: {
+      //mainet
+      url: `https://rpc.ankr.com/optimism`,
+      accounts: process.env.DEPLOYER_PK ? [process.env.DEPLOYER_PK] : undefined,
+    },
   },
   gasReporter: {
     enabled: process.env.REPORT_GAS !== undefined,
@@ -152,6 +166,8 @@ const config: HardhatUserConfig = {
       "linea-mainnet": process.env.ETHERSCAN_API_KEY!,
       "base-testnet": "no_key_needed",
       "base-mainnet": process.env.ETHERSCAN_API_KEY!,
+      arbitrum: process.env.ARBSCAN_API_KEY!,
+      optimism: process.env.OP_API_KEY!,
     },
     customChains: [
       {
@@ -192,6 +208,22 @@ const config: HardhatUserConfig = {
         urls: {
           apiURL: "https://api.basescan.org/api",
           browserURL: "https://basescan.org",
+        },
+      },
+      {
+        network: "arbitrum",
+        chainId: 42161,
+        urls: {
+          apiURL: "https://api.arbiscan.io/api",
+          browserURL: "https://arbiscan.io",
+        },
+      },
+      {
+        network: "optimism",
+        chainId: 10,
+        urls: {
+          apiURL: "https://api-optimistic.etherscan.io/api",
+          browserURL: "https://explorer.optimism.io",
         },
       },
     ],
