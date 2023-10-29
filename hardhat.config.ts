@@ -16,6 +16,10 @@ import "@typechain/hardhat";
 import "hardhat-gas-reporter";
 import "solidity-coverage";
 
+// const { ProxyAgent, setGlobalDispatcher } = require("undici");
+// const proxyAgent = new ProxyAgent("http://127.0.0.1:33210");
+// setGlobalDispatcher(proxyAgent);
+
 // Filter Reference Contracts
 subtask(TASK_COMPILE_SOLIDITY_GET_SOURCE_PATHS).setAction(
   async (_, __, runSuper) => {
@@ -150,6 +154,13 @@ const config: HardhatUserConfig = {
       url: `https://rpc.ankr.com/optimism`,
       accounts: process.env.DEPLOYER_PK ? [process.env.DEPLOYER_PK] : undefined,
     },
+
+    scroll: {
+      //mainet
+      // url: `https://rpc.scroll.io/`,
+      url: "https://rpc.ankr.com/scroll",
+      accounts: process.env.DEPLOYER_PK ? [process.env.DEPLOYER_PK] : undefined,
+    },
   },
   gasReporter: {
     enabled: process.env.REPORT_GAS !== undefined,
@@ -168,6 +179,7 @@ const config: HardhatUserConfig = {
       "base-mainnet": process.env.ETHERSCAN_API_KEY!,
       arbitrum: process.env.ARBSCAN_API_KEY!,
       optimism: process.env.OP_API_KEY!,
+      scroll: "no_key_needed",
     },
     customChains: [
       {
@@ -224,6 +236,14 @@ const config: HardhatUserConfig = {
         urls: {
           apiURL: "https://api-optimistic.etherscan.io/api",
           browserURL: "https://explorer.optimism.io",
+        },
+      },
+      {
+        network: "scroll",
+        chainId: 534352,
+        urls: {
+          apiURL: "https://blockscout.scroll.io/api",
+          browserURL: "https://blockscout.scroll.io/",
         },
       },
     ],
