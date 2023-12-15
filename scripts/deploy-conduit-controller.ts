@@ -14,7 +14,7 @@ async function main() {
   const ConduitController = await ethers.getContractFactory(
     "ConduitController"
   );
-  process.exit(1)
+  // process.exit(1)
 
   const conduitController = await ConduitController.deploy();
   await conduitController.deployed();
