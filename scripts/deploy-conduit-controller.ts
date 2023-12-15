@@ -8,32 +8,21 @@ function delay(ms: number) {
 }
 
 async function main() {
+  console.log("==begin deploying...")
+
   // 部署 conduit controller
-  // const ConduitController = await ethers.getContractFactory(
-  //   "ConduitController"
-  // );
-  // const conduitController = await ConduitController.deploy();
-  // await conduitController.deployed();
-  // console.log(
-  //   "ConduitController Contract deployed to address:",
-  //   conduitController.address
-  // );
-
-  // await delay(3000)
-
-  // 部署alienswap合约  交易所的合约
-  const Alienswap = await ethers.getContractFactory(
-    "Alienswap"
+  const ConduitController = await ethers.getContractFactory(
+    "ConduitController"
   );
-  // zkfair 现在还没有 opensea 官方的conduit controller， 需要打开上面的部署脚本，先部署 conduitController，再改这里的地址？？？
-  // const alienswap = await Alienswap.deploy("0x00000000f9490004c11cef243f5400493c00ad63"); // opensea官方部署的conduit controller
+  process.exit(1)
 
-  const alienswap = await Alienswap.deploy("replace-mine"); // opensea官方部署的conduit controller
-  await alienswap.deployed();
+  const conduitController = await ConduitController.deploy();
+  await conduitController.deployed();
   console.log(
-    "Alienswap Contract deployed to address:",
-    alienswap.address
+    "ConduitController Contract deployed to address:",
+    conduitController.address
   );
+
 }
 
 async function deploy3(
