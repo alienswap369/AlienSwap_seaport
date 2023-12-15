@@ -25,10 +25,11 @@ async function main() {
   const Alienswap = await ethers.getContractFactory(
     "Alienswap"
   );
-  // zkfair 现在还没有 opensea 官方的conduit controller， 需要打开上面的部署脚本，先部署 conduitController，再改这里的地址？？？
-  // const alienswap = await Alienswap.deploy("0x00000000f9490004c11cef243f5400493c00ad63"); // opensea官方部署的conduit controller
 
-  const alienswap = await Alienswap.deploy("replace-mine"); // opensea官方部署的conduit controller
+  // const alienswap = await Alienswap.deploy("0x00000000f9490004c11cef243f5400493c00ad63"); // opensea官方部署的conduit controller
+  // npx hardhat run scripts/deploy-conduit-controller.ts --network zkfair-testnet
+  // ConduitController Contract deployed to address: 0x7A2457be35277e4703a18a4481b409Db1ECf8357
+  const alienswap = await Alienswap.deploy("0x7A2457be35277e4703a18a4481b409Db1ECf8357");
   await alienswap.deployed();
   console.log(
     "Alienswap Contract deployed to address:",

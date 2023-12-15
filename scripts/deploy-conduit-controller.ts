@@ -10,11 +10,11 @@ function delay(ms: number) {
 async function main() {
   console.log("==begin deploying...")
 
+  // 没搜到opensea官方部署的地址 0x00000000f9490004c11cef243f5400493c00ad63， 自己在新链上部署
   // 部署 conduit controller
   const ConduitController = await ethers.getContractFactory(
     "ConduitController"
   );
-  // process.exit(1)
 
   const conduitController = await ConduitController.deploy();
   await conduitController.deployed();
@@ -22,7 +22,6 @@ async function main() {
     "ConduitController Contract deployed to address:",
     conduitController.address
   );
-
 }
 
 async function deploy3(
