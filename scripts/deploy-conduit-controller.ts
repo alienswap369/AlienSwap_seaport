@@ -1,15 +1,6 @@
-import hre, { ethers } from "hardhat";
-import { Contract } from "@ethersproject/contracts";
-import { Interface } from "@ethersproject/abi";
-import { keccak256 } from "@ethersproject/solidity";
-
-function delay(ms: number) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
+import { ethers } from "hardhat";
 
 async function main() {
-  console.log("==begin deploying...")
-
   // 没搜到opensea官方部署的地址 0x00000000f9490004c11cef243f5400493c00ad63， 自己在新链上部署
   // 部署 conduit controller
   const ConduitController = await ethers.getContractFactory(
@@ -22,58 +13,6 @@ async function main() {
     "ConduitController Contract deployed to address:",
     conduitController.address
   );
-}
-
-async function deploy3(
-  contractName: string,
-  version: string,
-  args: any[] = []
-) {
-  const [deployer] = await ethers.getSigners();
-  // https://github.com/lifinance/create3-factory
-  const create3Factory = new Contract(
-    "0x93FEC2C00BfE902F733B57c5a6CeeD7CD1384AE1",
-    new Interface([
-      `
-          function deploy(
-            bytes32 salt,
-            bytes memory creationCode
-          ) returns (address)
-        `,
-      `
-          function getDeployed(
-            address deployer,
-            bytes32 salt
-          ) view returns (address)
-        `,
-    ]),
-    deployer
-  );
-
-  const salt = keccak256(["string", "string"], [contractName, version]);
-  const creationCode = await ethers
-    .getContractFactory(contractName, deployer)
-    .then((factory) => factory.getDeployTransaction(...args).data);
-
-  await create3Factory.deploy(salt, creationCode);
-
-  const deploymentAddress: string = await create3Factory.getDeployed(
-    deployer.address,
-    salt
-  );
-  return deploymentAddress;
-}
-
-async function verify(
-  contractName: string,
-  contractAddress: string,
-  args: any[]
-) {
-  await hre.run("verify:verify", {
-    address: contractAddress,
-    constructorArguments: args,
-  });
-  console.log(`"${contractName}" successfully verified on Etherscan`);
 }
 
 main().catch((error) => {

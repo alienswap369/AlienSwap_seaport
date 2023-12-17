@@ -164,7 +164,6 @@ const config: HardhatUserConfig = {
 
     // ZkFair https://g5bnl7uj508.sg.larksuite.com/docx/NDzOdF2Gyo5Ifkx9DlDl1U2Sgpg
     "zkfair-testnet": {
-      // url: "https://testnet-rpc.zkfair.io",
       url: "https://testnet-rpc.zkfair.io",
       accounts: process.env.DEPLOYER_PK ? [process.env.DEPLOYER_PK] : undefined,
     },
