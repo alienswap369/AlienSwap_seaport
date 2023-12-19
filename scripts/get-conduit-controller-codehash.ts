@@ -5,8 +5,8 @@ async function main() {
   // npx hardhat run scripts/get-conduit-controller-codehash.ts --network base-mainnet
   // const conduitControllerAddr = "0x00000000f9490004c11cef243f5400493c00ad63";
 
-  // npx hardhat run scripts/get-conduit-controller-codehash.ts --network zkfair-testnet
-  const conduitControllerAddr = "0x7A2457be35277e4703a18a4481b409Db1ECf8357";
+  // npx hardhat run scripts/get-conduit-controller-codehash.ts --network zkfair
+  const conduitControllerAddr = "todo-mainnet";
   const controller = await ethers.getContractAt("ConduitController", conduitControllerAddr);
 
   const result = await controller.getConduitCodeHashes();

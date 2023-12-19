@@ -27,9 +27,9 @@ async function main() {
   );
 
   // const alienswap = await Alienswap.deploy("0x00000000f9490004c11cef243f5400493c00ad63"); // opensea官方部署的conduit controller
-  // npx hardhat run scripts/deploy-conduit-controller.ts --network zkfair-testnet
-  // ConduitController Contract deployed to address: 0x7A2457be35277e4703a18a4481b409Db1ECf8357
-  const alienswap = await Alienswap.deploy("0x7A2457be35277e4703a18a4481b409Db1ECf8357");
+
+  // npx hardhat run scripts/deploy-conduit-controller.ts --network zkfair
+  const alienswap = await Alienswap.deploy("todo-mainnet-conduit-controller");
   await alienswap.deployed();
   console.log(
     "Alienswap Contract deployed to address:",
