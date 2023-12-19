@@ -161,16 +161,14 @@ const config: HardhatUserConfig = {
       url: "https://rpc.ankr.com/scroll",
       accounts: process.env.DEPLOYER_PK ? [process.env.DEPLOYER_PK] : undefined,
     },
-
-    // ZkFair https://g5bnl7uj508.sg.larksuite.com/docx/NDzOdF2Gyo5Ifkx9DlDl1U2Sgpg
     "zkfair-testnet": {
       url: "https://testnet-rpc.zkfair.io",
       accounts: process.env.DEPLOYER_PK ? [process.env.DEPLOYER_PK] : undefined,
     },
-    // "zkfair-mainnet": {
-    //   url: "todo-xxx",
-    //   accounts: process.env.DEPLOYER_PK ? [process.env.DEPLOYER_PK] : undefined,
-    // },
+    zkfair: {
+      url: "https://rpc.zkfair.io",
+      accounts: process.env.DEPLOYER_PK ? [process.env.DEPLOYER_PK] : undefined,
+    },
   },
   gasReporter: {
     enabled: process.env.REPORT_GAS !== undefined,
@@ -191,7 +189,7 @@ const config: HardhatUserConfig = {
       optimism: process.env.OP_API_KEY!,
       scroll: "no_key_needed",
       "zkfair-testnet": "no_key_needed",
-      // "zkfair-mainnet": process.env.ZKFAIR_API_KEY,
+      zkfair: "no_key_needed",
     },
     customChains: [
       {
@@ -262,18 +260,18 @@ const config: HardhatUserConfig = {
         network: "zkfair-testnet",
         chainId: 43851,
         urls: {
-          apiURL: "todo-api",
+          apiURL: "https://testnet-scan.zkfair.io/api",
           browserURL: "https://testnet-scan.zkfair.io",
         },
       },
-      // {
-      //   network: "zkfair-mainnet",
-      //   chainId: 43852,
-      //   urls: {
-      //     apiURL: "todo-api",
-      //     browserURL: "https://todo-scan.zkfair.io",
-      //   },
-      // },
+      {
+        network: "zkfair",
+        chainId: 42766,
+        urls: {
+          apiURL: "https://scan.zkfair.io/api",
+          browserURL: "https://scan.zkfair.io",
+        },
+      },
     ],
   },
   // specify separate cache for hardhat, since it could possibly conflict with foundry's
