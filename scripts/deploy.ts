@@ -21,11 +21,15 @@ async function main() {
 
   // await delay(3000)
 
-  // 部署alienswap合约
+  // 部署alienswap合约  交易所的合约
   const Alienswap = await ethers.getContractFactory(
     "Alienswap"
   );
-  const alienswap = await Alienswap.deploy("0x00000000f9490004c11cef243f5400493c00ad63"); // opensea官方部署的conduit controller
+
+  // const alienswap = await Alienswap.deploy("0x00000000f9490004c11cef243f5400493c00ad63"); // opensea官方部署的conduit controller
+
+  // npx hardhat run scripts/deploy-conduit-controller.ts --network zkfair
+  const alienswap = await Alienswap.deploy("todo-mainnet-conduit-controller");
   await alienswap.deployed();
   console.log(
     "Alienswap Contract deployed to address:",

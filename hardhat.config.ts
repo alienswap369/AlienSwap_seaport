@@ -161,6 +161,14 @@ const config: HardhatUserConfig = {
       url: "https://rpc.ankr.com/scroll",
       accounts: process.env.DEPLOYER_PK ? [process.env.DEPLOYER_PK] : undefined,
     },
+    "zkfair-testnet": {
+      url: "https://testnet-rpc.zkfair.io",
+      accounts: process.env.DEPLOYER_PK ? [process.env.DEPLOYER_PK] : undefined,
+    },
+    zkfair: {
+      url: "https://rpc.zkfair.io",
+      accounts: process.env.DEPLOYER_PK ? [process.env.DEPLOYER_PK] : undefined,
+    },
   },
   gasReporter: {
     enabled: process.env.REPORT_GAS !== undefined,
@@ -180,6 +188,8 @@ const config: HardhatUserConfig = {
       arbitrum: process.env.ARBSCAN_API_KEY!,
       optimism: process.env.OP_API_KEY!,
       scroll: "no_key_needed",
+      "zkfair-testnet": "no_key_needed",
+      zkfair: "no_key_needed",
     },
     customChains: [
       {
@@ -244,6 +254,22 @@ const config: HardhatUserConfig = {
         urls: {
           apiURL: "https://blockscout.scroll.io/api",
           browserURL: "https://blockscout.scroll.io/",
+        },
+      },
+      {
+        network: "zkfair-testnet",
+        chainId: 43851,
+        urls: {
+          apiURL: "https://testnet-scan.zkfair.io/api",
+          browserURL: "https://testnet-scan.zkfair.io",
+        },
+      },
+      {
+        network: "zkfair",
+        chainId: 42766,
+        urls: {
+          apiURL: "https://scan.zkfair.io/api",
+          browserURL: "https://scan.zkfair.io",
         },
       },
     ],
