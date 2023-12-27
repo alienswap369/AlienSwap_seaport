@@ -1,4 +1,4 @@
 # https://taskfile.dev
 version: "3"
 tasks:
-  x1t: npx hardhat run scripts/deploy-conduit-controller.ts --network x1-testnet
+  deploy-x1-testnet: npx hardhat create-conduit-controller --network x1-testnet
