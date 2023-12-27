@@ -1,0 +1,16 @@
+# Deploy logs
+
+## 2023-12-27T08:20:30.047Z network: x1-testnet deploy ConduitController 
+Contract address: 0x66275F453DA73b9d6Db967dEc5E1E01A3f383841
+
+Next steps: 
+  npx hardhat conduit-controller-codehashs --network x1-testnet 0x66275F453DA73b9d6Db967dEc5E1E01A3f383841
+  npx hardhat create-alienswap --network x1-testnet 0x66275F453DA73b9d6Db967dEc5E1E01A3f383841
+
+## 2023-12-27T08:20:53.465Z network: x1-testnet conduit-controller 0x66275F453DA73b9d6Db967dEc5E1E01A3f383841
+query (bytes32 creationCodeHash, bytes32 runtimeCodeHash), get result:
+0xfde822a5f8cca372c4a13e06a9a2baea0f8a45e42347603e34607fab3aacea4c,0x8888e96fc292e2bb622698c1c73cea326ff0eedad80b882a160ec71c013b11c7
+
+
+## 2023-12-27T08:21:52.962Z network: x1-testnet deploy Alienswap with controller: 0x66275F453DA73b9d6Db967dEc5E1E01A3f383841
+!!! Alienswap Contract address: 0x459c161dd1eb14c0D260457197B74065220EEAd2

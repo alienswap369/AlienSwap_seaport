@@ -16,6 +16,12 @@ import "@typechain/hardhat";
 import "hardhat-gas-reporter";
 import "solidity-coverage";
 
+// customize tasks
+import "./tasks/test-task";
+import "./tasks/create-conduit-controller";
+import "./tasks/conduit-controller-codehashs";
+import "./tasks/create-alienswap";
+
 // const { ProxyAgent, setGlobalDispatcher } = require("undici");
 // const proxyAgent = new ProxyAgent("http://127.0.0.1:33210");
 // setGlobalDispatcher(proxyAgent);
@@ -169,6 +175,10 @@ const config: HardhatUserConfig = {
       url: "https://rpc.zkfair.io",
       accounts: process.env.DEPLOYER_PK ? [process.env.DEPLOYER_PK] : undefined,
     },
+    "x1-testnet": {
+      url: "https://testrpc.x1.tech",
+      accounts: process.env.DEPLOYER_PK ? [process.env.DEPLOYER_PK] : undefined,
+    }
   },
   gasReporter: {
     enabled: process.env.REPORT_GAS !== undefined,
@@ -190,6 +200,7 @@ const config: HardhatUserConfig = {
       scroll: "no_key_needed",
       "zkfair-testnet": "no_key_needed",
       zkfair: "no_key_needed",
+      "x1-testnet": "no_key_needed",
     },
     customChains: [
       {
@@ -272,6 +283,16 @@ const config: HardhatUserConfig = {
           browserURL: "https://scan.zkfair.io",
         },
       },
+      // https://www.oklink.com/docs/zh/#explorer-introduction
+      {
+        network: "x1-testnet",
+        chainId: 195,
+        urls: {
+          // POST /api/v5/explorer/contract/verify-source-code
+          apiURL: "https://www.oklink.com/",
+          browserURL: " https://www.oklink.com/cn/x1-test",
+        },
+      }
     ],
   },
   // specify separate cache for hardhat, since it could possibly conflict with foundry's
