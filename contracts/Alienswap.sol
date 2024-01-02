@@ -100,10 +100,17 @@ contract Alienswap is Consideration {
      * @return The name of this contract.
      */
     function _name() internal pure override returns (string memory) {
-        // Return the name of the contract.
+        // // Return the name of the contract Seaport.
+        // assembly {
+        //     mstore(0x20, 0x20)
+        //     mstore(0x47, 0x07536561706f7274)
+        //     return(0x20, 0x60)
+        // }
+
+        // Return the name of the contract using modified assembly instructions.
         assembly {
-            mstore(0x20, 0x20)
-            mstore(0x47, 0x07536561706f7274)
+            mstore(0x20, 0x19) // Adjust length for "Alienswap" (0x19 = 25 bytes)
+            mstore(0x47, 0x416c69656e73776170) // Store "Alienswap" bytes
             return(0x20, 0x60)
         }
     }
