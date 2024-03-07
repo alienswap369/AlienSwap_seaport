@@ -25,9 +25,9 @@ async function main() {
   const Alienswap = await ethers.getContractFactory("Alienswap");
 
   // opensea官方部署的conduit controller
-  // const alienswap = await Alienswap.deploy("0x00000000f9490004c11cef243f5400493c00ad63"); 
+  const alienswap = await Alienswap.deploy("0x00000000f9490004c11cef243f5400493c00ad63"); 
 
-  const alienswap = await Alienswap.deploy("todo-conduit-controller");
+  // const alienswap = await Alienswap.deploy("todo-conduit-controller");
   await alienswap.deployed();
   console.log("Alienswap Contract deployed to address:", alienswap.address);
 }

@@ -178,7 +178,15 @@ const config: HardhatUserConfig = {
     "x1-testnet": {
       url: "https://testrpc.x1.tech",
       accounts: process.env.DEPLOYER_PK ? [process.env.DEPLOYER_PK] : undefined,
-    }
+    },
+    "opbnb-testnet": {
+      url: "https://opbnb-testnet-rpc.bnbchain.org",
+      accounts: process.env.DEPLOYER_PK ? [process.env.DEPLOYER_PK] : undefined,
+    },
+    "opbnb": {
+      url: "https://opbnb-rpc.publicnode.com",
+      accounts: process.env.DEPLOYER_PK ? [process.env.DEPLOYER_PK] : undefined,
+    },
   },
   gasReporter: {
     enabled: process.env.REPORT_GAS !== undefined,
@@ -201,6 +209,8 @@ const config: HardhatUserConfig = {
       "zkfair-testnet": "no_key_needed",
       zkfair: "no_key_needed",
       "x1-testnet": "no_key_needed",
+      "opbnb-testnet": "no_key_needed",
+      "opbnb": "no_key_needed",
     },
     customChains: [
       {
@@ -291,6 +301,22 @@ const config: HardhatUserConfig = {
           // POST /api/v5/explorer/contract/verify-source-code
           apiURL: "https://www.oklink.com/",
           browserURL: " https://www.oklink.com/cn/x1-test",
+        },
+      },
+      {
+        network: "opbnb-testnet",
+        chainId: 5611,
+        urls: {
+          apiURL: "https://api-opbnb-testnet.bscscan.com/api",
+          browserURL: "https://opbnb-testnet.bscscan.com/",
+        },
+      },
+      {
+        network: "opbnb",
+        chainId: 204,
+        urls: {
+          apiURL: "https://api-opbnb.bscscan.com/api",
+          browserURL: "https://opbnb.bscscan.com/",
         },
       }
     ],
