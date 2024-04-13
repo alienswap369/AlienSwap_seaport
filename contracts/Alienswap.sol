@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.17;
 
-import { Consideration } from "./lib/Consideration.sol";
+import { Consideration } from "seaport-core/src/lib/Consideration.sol";
 
 /**
  * @title Alienswap
- * @custom:version 1.4
+ * @custom:version 1.5
  * @author 0age (0age.eth)
  * @custom:coauthor d1ll0n (d1ll0n.eth)
  * @custom:coauthor transmissions11 (t11s.eth)
@@ -75,7 +75,7 @@ import { Consideration } from "./lib/Consideration.sol";
  * @custom:contributor rfart(rfa)
  * @custom:contributor Riley Holterhus
  * @custom:contributor big-tech-sux
- * @notice Seaport is a generalized native token/ERC20/ERC721/ERC1155
+ * @notice Alienswap is a generalized native token/ERC20/ERC721/ERC1155
  *         marketplace with lightweight methods for common routes as well as
  *         more flexible methods for composing advanced orders or groups of
  *         orders. Each order contains an arbitrary number of items that may be
