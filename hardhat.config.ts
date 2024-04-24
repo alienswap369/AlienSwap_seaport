@@ -56,6 +56,8 @@ const optimizerSettingsNoSpecializer = {
     constantOptimizer: true,
     yulDetails: {
       stackAllocation: true,
+      optimizerSteps:
+        "dhfoDgvulfnTUtnIf[xa[r]EscLMcCTUtTOntnfDIulLculVcul [j]Tpeulxa[rul]xa[r]cLgvifCTUca[r]LSsTOtfDnca[r]Iulc]jmul[jul] VcTOcul jmul",
     },
   },
 };
@@ -71,7 +73,9 @@ const config: HardhatUserConfig = {
         settings: {
           viaIR: true,
           optimizer: {
-            ...optimizerSettingsNoSpecializer,
+            ...(process.env.NO_SPECIALIZER
+              ? optimizerSettingsNoSpecializer
+              : { enabled: true, runs: 4_294_967_295 }),
           },
           metadata: {
             bytecodeHash: "none",
@@ -105,13 +109,23 @@ const config: HardhatUserConfig = {
           },
         },
       },
-      "contracts/helper/TransferHelper.sol": {
+      "contracts/helpers/TransferHelper.sol": {
         version: "0.8.14",
         settings: {
           viaIR: true,
           optimizer: {
             enabled: true,
             runs: 1000000,
+          },
+        },
+      },
+      "contracts/helpers/order-validator": {
+        version: "0.8.17",
+        settings: {
+          viaIR: false,
+          optimizer: {
+            enabled: true,
+            runs: 1,
           },
         },
       },
