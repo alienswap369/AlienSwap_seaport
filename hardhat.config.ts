@@ -137,6 +137,10 @@ const config: HardhatUserConfig = {
       throwOnCallFailures: false,
       allowUnlimitedContractSize: false,
     },
+    xlayerTestnet: {
+      chainId: 195,
+      url: "https://testrpc.xlayer.tech"
+    },
     verificationNetwork: {
       url: process.env.NETWORK_RPC ?? "",
     },
