@@ -139,7 +139,13 @@ const config: HardhatUserConfig = {
     },
     xlayerTestnet: {
       chainId: 195,
-      url: "https://testrpc.xlayer.tech"
+      url: "https://testrpc.xlayer.tech",
+      accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
+    },
+    xlayerMainnet: {
+      chainId: 196,
+      url: "https://rpc.xlayer.tech",
+      accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
     },
     verificationNetwork: {
       url: process.env.NETWORK_RPC ?? "",
@@ -152,7 +158,25 @@ const config: HardhatUserConfig = {
     noColors: true,
   },
   etherscan: {
-    apiKey: process.env.EXPLORER_API_KEY,
+    apiKey: process.env.OKLINK_API_KEY,
+    customChains: [
+      {
+        network: "xlayerTestnet",
+        chainId: 195, //196 for mainnet
+        urls: {
+          apiURL: "https://www.oklink.com/api/v5/explorer/contract/verify-source-code-plugin/XLAYER_TESTNET",
+          browserURL: "https://www.oklink.com/xlayer-test"
+        }
+      },
+      {
+        network: "xlayerMainnet",
+        chainId: 196,
+        urls: {
+          apiURL: "https://www.oklink.com/api/v5/explorer/contract/verify-source-code-plugin/XLAYER",
+          browserURL: "https://www.oklink.com/xlayer"
+        }
+      },
+    ]
   },
   // specify separate cache for hardhat, since it could possibly conflict with foundry's
   paths: { cache: "hh-cache" },
