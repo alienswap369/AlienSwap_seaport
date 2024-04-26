@@ -132,6 +132,11 @@ const config: HardhatUserConfig = {
     },
   },
   networks: {
+    mainnet: {
+      chainId: 1,
+      url: `https://rpc.ankr.com/eth`,
+      accounts: [`${process.env.PRIVATE_KEY}`],
+    },
     hardhat: {
       blockGasLimit: 30_000_000,
       throwOnCallFailures: false,
