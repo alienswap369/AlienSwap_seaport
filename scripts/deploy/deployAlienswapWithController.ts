@@ -32,52 +32,40 @@ async function main() {
     contractName = "ConduitController";
     const conduitControllerAddress = "0x00000000F9490004C11Cef243f5400493c00Ad63"
     const conduitController = new _ethers.Contract(conduitControllerAddress, conduitControllerArtifacts.abi, deployer)
-    // fs.writeFileSync("deployed-contracts.txt", `${contractName}: ${conduitControllerAddress}\n`);
+    fs.writeFileSync("deployed-contracts.txt", `${contractName}: ${conduitControllerAddress}\n`);
 
-    // contractName = "Alienswap";
-    // contractFactory = await ethers.getContractFactory(contractName);
+    contractName = "Alienswap";
+    contractFactory = await ethers.getContractFactory(contractName);
 
-    // args = [conduitControllerAddress];
-    // const alienswap = await contractFactory.deploy(conduitControllerAddress);
-    // await alienswap.deployed();
-    // const alienswapAddress = alienswap.address;
-    // await verify(alienswapAddress, args)
+    args = [conduitControllerAddress];
+    const alienswap = await contractFactory.deploy(conduitControllerAddress);
+    await alienswap.deployed();
+    const alienswapAddress = alienswap.address;
+    await verify(alienswapAddress, args)
 
-    // console.log(`${contractName} address:`, alienswapAddress);
-    // fs.appendFileSync("deployed-contracts.txt", `${contractName}: ${alienswapAddress}\n`);
+    console.log(`${contractName} address:`, alienswapAddress);
+    fs.appendFileSync("deployed-contracts.txt", `${contractName}: ${alienswapAddress}\n`);
 
-    // await new Promise((resolve) => setTimeout(resolve, 5000));
+    await new Promise((resolve) => setTimeout(resolve, 5000));
     //Set up controller
     // const gasLimit = ethers.BigNumber.from(3000000);
-    const owner = "0xDc17C60E799174f18cc6527a52d60462df84bc97";
+    const owner = "0xBb2Aa4B3656d859D36376BA525d9A67091EBcc72";
     const conduitKey = `${owner}000000000000000000000000`;
-    // await conduitController.createConduit(conduitKey, owner,
-    //     // {
-    //     //     gasLimit: gasLimit,
-    //     //     maxFeePerGas: ethers.utils.parseUnits("0.135", "gwei"),
-    //     //     maxPriorityFeePerGas: ethers.utils.parseUnits("0.0001", "gwei"),
-    //     // }
-    // );
-    // console.log(`Conduit created with key: ${conduitKey}`)
-    // fs.appendFileSync("deployed-contracts.txt", `ConduitKey: ${conduitKey}\n`);
+    await conduitController.createConduit(conduitKey, owner);
+    console.log(`Conduit created with key: ${conduitKey}`)
+    fs.appendFileSync("deployed-contracts.txt", `ConduitKey: ${conduitKey}\n`);
 
-    // await new Promise((resolve) => setTimeout(resolve, 5000));
+    await new Promise((resolve) => setTimeout(resolve, 5000));
 
     const data = await conduitController.getConduit(conduitKey);
     const conduitAddress = data['conduit'];
-    // fs.appendFileSync("deployed-contracts.txt", `Conduit: ${conduitAddress}\n`);
-    // await verify(conduitAddress, [])
+    console.log(`Conduit address:`, conduitAddress)
+    fs.appendFileSync("deployed-contracts.txt", `Conduit: ${conduitAddress}\n`);
 
     const channelsBefore = await conduitController.getChannels(conduitAddress)
     console.log(`channelsBefore: ${channelsBefore}`)
 
-    await conduitController.updateChannel(conduitAddress, "0x156ADd7faf8391dcbCc904B0EbA0e8BF518265ba", true,
-        //     {
-        //         gasLimit: gasLimit,
-        //         maxFeePerGas: ethers.utils.parseUnits("0.135", "gwei"),
-        //         maxPriorityFeePerGas: ethers.utils.parseUnits("0.0001", "gwei"),
-        //     }
-    );
+    await conduitController.updateChannel(conduitAddress, alienswapAddress, true);
     await new Promise((resolve) => setTimeout(resolve, 5000));
 
     const channelsAfter = await conduitController.getChannels(conduitAddress)
